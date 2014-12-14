@@ -8,14 +8,12 @@
 ;;; such case, and I want a handy way to write it. It's not difficult.
 (in-package :case-sensitive-quote)
 
-(defun |^-reader| (strm c)
+(eval-when (:load-toplevel :compile-toplevel :execute)
+  (defun case-sensitive-quote-reader (strm c)
   (declare (ignore c))
   `(quote ,(let* ((*readtable* (copy-readtable)))
              (setf (readtable-case *readtable*) :preserve)
-             (read strm nil nil t))))
+             (read strm nil nil t)))))
 
-(set-macro-character #\^ '|^-reader|)
-
-(read-from-string "^abcd")
-
-'abc
+(defun enable-case-sensitive-quote (&optional (quote-char #\^))
+  (set-macro-character quote-char 'case-sensitive-quote-reader))
