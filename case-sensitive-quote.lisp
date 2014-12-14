@@ -26,8 +26,8 @@
 
 (defun disable-case-sensitive-quote ()
   " Disables the case sensitive quote reader macro and reverts the
-   reader macro for the character that is used as the case sensitive
-   quote."
+   reader macro function for the character that is used as the case
+   sensitive quote."
   (set-macro-character
     (car *previous-macro-character-function*)
     (cdr *previous-macro-character-function*))
