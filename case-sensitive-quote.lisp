@@ -19,7 +19,12 @@
 
 (defun enable-case-sensitive-quote (&optional (quote-char #\^))
   " Enables the case sensitive quote by setting up the QUOTE-CHAR as the
-   quote character for the case sensitive quote."
+   quote character for the case sensitive quote. The default QUOTE-CHAR
+   is #\^. If this function is called twice without intervening call of
+   DISABLE-CASE-SENSITIVE-QUOTE, the case sensitive quote character is
+   disabled on the second time call of this function."
+  (when *previous-macro-character-function*
+    (disable-case-sensitive-quote))
   (setf *previous-macro-character-function*
         (cons quote-char (get-macro-character quote-char)))
   (set-macro-character quote-char 'case-sensitive-quote-reader))
