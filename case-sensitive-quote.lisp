@@ -15,5 +15,20 @@
              (setf (readtable-case *readtable*) :preserve)
              (read strm nil nil t)))))
 
+(defvar *previous-macro-character-function* nil)
+
 (defun enable-case-sensitive-quote (&optional (quote-char #\^))
+  " Enables the case sensitive quote by setting up the QUOTE-CHAR as the
+   quote character for the case sensitive quote."
+  (setf *previous-macro-character-function*
+        (cons quote-char (get-macro-character quote-char)))
   (set-macro-character quote-char 'case-sensitive-quote-reader))
+
+(defun disable-case-sensitive-quote ()
+  " Disables the case sensitive quote reader macro and reverts the
+   reader macro for the character that is used as the case sensitive
+   quote."
+  (set-macro-character
+    (car *previous-macro-character-function*)
+    (cdr *previous-macro-character-function*))
+  (setf *previous-macro-character-function* nil))
