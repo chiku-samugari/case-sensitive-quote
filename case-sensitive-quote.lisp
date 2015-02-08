@@ -10,10 +10,10 @@
 
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (defun case-sensitive-quote-reader (strm c)
-  (declare (ignore c))
-  `(quote ,(let* ((*readtable* (copy-readtable)))
-             (setf (readtable-case *readtable*) :preserve)
-             (read strm nil nil t)))))
+    (declare (ignore c))
+    `(quote ,(let* ((*readtable* (copy-readtable)))
+               (setf (readtable-case *readtable*) :preserve)
+               (read strm nil nil t)))))
 
 (defvar *previous-macro-character-function* nil)
 
