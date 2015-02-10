@@ -13,7 +13,7 @@
     (declare (ignore c))
     `(quote ,(let* ((*readtable* (copy-readtable)))
                (setf (readtable-case *readtable*) :preserve)
-               (read strm nil nil t)))))
+               (read strm t nil t)))))
 
 (defvar *previous-macro-character-function* nil)
 
