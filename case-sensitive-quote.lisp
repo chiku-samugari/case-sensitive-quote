@@ -11,7 +11,7 @@
 (eval-when (:load-toplevel :compile-toplevel :execute)
   (defun case-sensitive-quote-reader (strm c)
     (declare (ignore c))
-    `(quote ,(let* ((*readtable* (copy-readtable)))
+    `(quote ,(let ((*readtable* (copy-readtable)))
                (setf (readtable-case *readtable*) :preserve)
                (read strm t nil t)))))
 
