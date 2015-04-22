@@ -10,6 +10,12 @@ In other words, it works same as the combination of *'* reader macro and
 
     '|aBc|
 
+When the case sensitve quote character is prepended before an open
+parenthesis for example, it will read a list whose constituent symbols
+are case sensitively intenred.
+
+    ^(a b c) ; => (|a| |b| |c|)
+
 ## Function ENABLE-CASE-SENSITIVE-QUOTE
 
     enable-case-sensitive-quote &optional (quote-char #\^) => t
