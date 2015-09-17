@@ -42,3 +42,9 @@ It disables the case sensitive quote currently used. If the case
 sensitive quote character was used as a different reader macro
 character, then this function reverts the previous reader macro
 function.
+
+## Author and License
+
+Author : chiku (Takehiko Nawata, samugari.penguin@gmail.com)
+
+License : MIT License
